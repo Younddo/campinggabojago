@@ -1,0 +1,6 @@
+| 기능 | Method | URL | Request | response |
+|:----------:|:----------:|:----------:|:----------:|:----------:|
+|로그인 |POST|/api/login|{'username':username_receive, "password": password_hash}|
+|회원가입|POST|/api/signin|{'id':id, 'pw':pw}| 가입완료 메세지
+|글 목록|POST|/api/main|| 글 목록
+|글 작성|POST|/api/write|{'title' : title, 'content': content, 'url' : url}, 'imgurl' : imgurl | 작성한 글 데이터
