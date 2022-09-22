@@ -1,13 +1,23 @@
-##  🍎 iOS 커리큘럼
+##  ✏️ API Table ✏️
 
-| Week | 세미나 | 과제 |커리큘럼 내용 |
-| ------ | -- | -- |----------- |
-| 1주차 | ☑️ | ☑️ | iOS 기초, H.I.G를 통한 컴포넌트의 이해, 화면 전환 |
-| 2주차 | ☑️ | ☑️ | Autolayout을 통한 기초 UI구성, Scroll View의 이해 |
-| 3주차 | ☑️ | ☑️ | TableView, CollectionView, 데이터 전달 방식 |
-| 4주차 | ☑️ | ☑️ | Cocoapods & Networking + 솝커톤 전 보충 세미나 |
-| 5주차 |  |  |디자인 합동 세미나 |
-| 6주차 |  |  |서버 합동 세미나 + 솝커톤  |
-| 7주차 |  |  |클론 코딩을 통한 실전 UI 구성, Animation, 통신 보충  |
-| 8주차 |  |  |e기획 경선 + 앱잼 전 보충 세미나 + 앱스토어 배포 가이드  |
-| 8주차 |  |  |e기획 경선 + 앱잼 전 보충 세미나 + 앱스토어 배포 가이드  || 8주차 |  |  |e기획 경선 + 앱잼 전 보충 세미나 + 앱스토어 배포 가이드  || 8주차 |  |  |e기획 경선 + 앱잼 전 보충 세미나 + 앱스토어 배포 가이드  |
+| 기능 | Method | URL | Request | response |
+| 로그인 페이지 로드 | POST | /login | ------- | return render_template('index.html', user_info=user_info) |
+| 회원가입 페이지 로드 | POST | /login | ------- | return render_template('index.html', user_info=user_info) |
+| 로그인 | POST | /sign_in |{'username': username_receive, 'password': pw_hash} | 로그인 성공 - return jsonify({'result': 'success', 'token': token}) 로그인 실패 - return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'}) |
+| 회원가입 | POST | /sign_up/save | {
+        "username": username_receive,                             
+        "password": password_hash,                                 
+        "profile_name": username_receive,                           
+        "profile_pic": "",                                          
+        "profile_pic_real": "profile_pics/profile_placeholder.png", 
+        "profile_info": ""                                          
+    } | return render_template('index.html', user_info=user_info) |
+| 중복 검사 | POST | /login | "username": username_receive | return jsonify({'result': 'success', 'exists': exists})|
+| 메인페이지 | GET | /get_posts | /get_posts | return jsonify({"result": "success", "msg": "포스팅을 가져왔습니다.","posts":posts}) |
+| 글쓰기 | POST | /posting | "username": user_info["username"],
+            "profile_name": user_info["profile_name"],
+            "profile_pic_real": user_info["profile_pic_real"],
+            "comment": comment_receive,
+            "date": date_receive | return jsonify({"result": "success", 'msg': '포스팅 성공'}) |
+| 포스팅 | GET | /sign_up/check_dup | post["_id"] = str(post["_id"]) | return jsonify({"result": "success", "msg": "포스팅을 가져왔습니다.","posts":posts}) |
+
