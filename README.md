@@ -12,10 +12,10 @@
 쿡핑은 다양한 캠핑 요리 레시피를 손쉽게 공유하고 찾아볼 수 있는 사이트 입니다.
 Youtube 링크를 공유해 보세요! 🎬
 
-## ◼️ 프로젝트 주소
+## ◼️ 프로젝트 주소 📍
 [COOKPING] http://shoumini.shop/
 
-## ◼️ 프로젝트 S.A 
+## ◼️ 프로젝트 S.A ✏️
 https://hightechsoon.tistory.com/15
 
 ## ◼️ 프로젝트 시연 영상 🎬
@@ -25,7 +25,7 @@ https://hightechsoon.tistory.com/15
 ## ◼️ 기술스택 🔨
 HTML / CSS / JavaScript / Python / Flask / mongoDB / Jinja2 /JQuery / Linux / AWS 
 
-## ◼️ 구현 기능
+## ◼️ 구현 기능 
 ### 1. 회원가입, 로그인 기능 (login.html)
 ### 2. 메인페이지
 ### 3. 글쓰기페이지
