@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Cookping</title>
+    <!-- index에서 필요한 기능-->
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <!--my CSS-->
+    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+
+    <script>
+
+        // const getButton = document.querySelector("#getBtn");
+        // const youtubeUrl = document.querySelectorAll(".youtube-url");
+        // const thumbnailWrap = document.querySelector(".thumbnail-wrap");
+        // getButton.addEventListener('click', getThum);
+        const inputUrl = document.querySelector('.field input');
+        let preview = document.querySelector('.preview');
+
+        // let thumb = preview.querySelector('.thumb')
+
+        function post() {
+            let title = $("#title").val();
+            let comment = $("#comment").val();
+            let today = new Date().toISOString();
+            let form_data = new FormData();
+            let url = $("#url").val();
+            // preview.classList.add('current')
+
+            // https://www.youtube.com/watch?v=Xwlsq_-fmrg
+            // https://youtu.be/Xwlsq_-fmrg
+            // https://youtube.com/watch?v=Xwlsq_-fmrg
+            // https://www.youtu.be/Xwlsq_-fmrg
+
+            const pattern1 = 'https://www.youtube.com/watch?v='
+            const pattern2 = 'https://youtube.com/watch?v='
+            const pattern3 = 'https://youtu.be/'
+            const pattern4 = 'https://www.youtu.be/'
+
+            if (url.indexOf(pattern1) != -1 || url.indexOf(pattern2) != -1) {
+                let valid = url.split('watch?v=')[1].substring(0, 11);
+                var imageThumb = `https://img.youtube.com/vi/${valid}/hqdefault.jpg`
+                imageThumb
+            } else if (url.indexOf(pattern3) != -1 || url.indexOf(pattern4) != -1) {
+                let valid = url.split('be/')[1].substring(0, 11);
+                var imageThumb = `https://img.youtube.com/vi/${valid}/hqdefault.jpg`
+
+            } else {
+                imageThumb = ""
+                // preview.classList.remove('current')
+            }
+
+            form_data.append("title_give", title)
+            form_data.append("comment_give", comment)
+            form_data.append("url_give", url)
+            form_data.append("img_give", imageThumb)
+            form_data.append("date_give", today)
+
+            $.ajax({
+                type: "POST",
+                url: "/posting",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $("#modal-post").removeClass("is-active")
+                    window.location.reload()
+                }
+            })
+        }
+
+        function time2str(date) {
+            let today = new Date()
+            let time = (today - date) / 1000 / 60  // 분
+
+            if (time < 60) {
+                return parseInt(time) + "분 전"
+            }
+            time = time / 60  // 시간
+            if (time < 24) {
+                return parseInt(time) + "시간 전"
+            }
+            time = time / 24
+            if (time < 7) {
+                return parseInt(time) + "일 전"
+            }
+            return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+        }
+
+        function get_posts() {
+            $("#post-box").empty()
+            $.ajax({
+                type: "GET",
+                url: "/get_posts",
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        let posts = response["posts"]
+                        for (let i = 0; i < posts.length; i++) {
+                            let post = posts[i]
+                            let time_post = new Date(post["date"])
+                            let time_before = time2str(time_post)
+                            let html_temp = `<section class="section">
+	<div class="container">
+		<div class="card">
+			<div class="card-image">
+				<figure class="image is-4by3">
+					<img src="${post['img']}" alt="Placeholder image">
+				</figure>
+			</div>
+			<div class="card-content">
+				<div class="media">
+					<div class="media-left">
+						<figure class="image is-48x48">
+							<img src="${post['img']}" alt="Placeholder image">
+						</figure>
+					</div>
+					<div class="media-content">
+						<p class="title is-4">${post['title']}</p>
+						<p class="subtitle is-6">@${post['username']}</p>
+					</div>
+				</div>
+
+				<div class="content">
+					${post['comment']} <a>
+					<br>
+					<a href="${post['url']}">YOUTUBE</a>
+					<br>
+					<time>${time_before}</time>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>`
+                            $("#post-box").append(html_temp)
+                        }
+                    }
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            get_posts()
+        })
+
+
+        // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
+        function sign_out() {
+            alert('로그아웃!')
+            window.location.href = "/login"
+        }
+
+
+    </script>
+
+    <!-- Favicon -->
+    <link href="../static/images/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet"/>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../static/css/style2.css" rel="stylesheet">
+
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 0.5em;
+        }
+
+        .card {
+            height: max-content;
+        }
+
+    </style>
+</head>
+
+<body>
+<!-- Topbar Start -->
+<div class="container-fluid bg-light pt-3 d-none d-lg-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <!--<p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+                    <p class="text-body px-3">|</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</p> -->
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<div class="container-fluid position-relative nav-bar p-0">
+    <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+            <a href="/"><img src="../static/images/cookpinglogo1.png" alt="로고이미지" width="200px"></a>
+            <!-- <a href="" class="navbar-brand">
+                <h1 class="m-0 text-primary">cookping</h1>
+            </a> -->
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav ml-auto py-0">
+                    <a href="/" class="nav-item nav-link active">쿡핑레시피</a>
+                    <a href="/about" class="nav-item nav-link">쿡핑이란?</a>
+                    <nav class="level is-mobile">
+                        <a class="button level-item has-text-centered " aria-label="logout" onclick="sign_out()">
+                            로그아웃 </a>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar End -->
+
+
+<!-- Header Start -->
+<div class="container-fluid page-header">
+    <div class="container">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-4 text-white text-uppercase">Cookping Recipe</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase">캠핑요리 레시피를 공유해 보아요</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<section class="section">
+    <article class="media">
+        <figure class="media-left" style="align-self: center">
+            <a class="image is-32x32" href="/user/{{ user_info.username }}">
+                <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
+            </a>
+        </figure>
+        <div class="media-content">
+            <div class="field">
+                <p class="control">
+                    <input id="input-post" class="input is-rounded" placeholder="Youtube Link 공유하기"
+                           onclick='$("#modal-post").addClass("is-active")'></p>
+            </div>
+        </div>
+    </article>
+    <div class="modal" id="modal-post">
+        <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
+        <div class="modal-content">
+            <div class="box">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input is-normal" id="title" type="text" placeholder="글 제목">
+                                <br> <br>
+
+                                <textarea class="textarea" id="comment" placeholder="코멘트"></textarea>
+                                <br>
+                                <input class="input is-normal" id="url" type="text" placeholder="URL">
+                            </p>
+                        </div>
+                        <nav class="level is-mobile">
+                            <div class="level-left">
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <a class="button is-sparta" onclick="post()">작성</a>
+                                </div>
+                                <div class="level-item">
+                                    <a class="button is-sparta is-outlined"
+                                       onclick='$("#modal-post").removeClass("is-active")'>취소</a>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"
+                onclick='$("#modal-post").removeClass("is-active")'></button>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container" id="post-box">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-48x48">
+                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4">John Smith</p>
+                        <p class="subtitle is-6">@johnsmith</p>
+                    </div>
+                </div>
+
+                <div class="content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                    <a>@bulmaio</a>.
+                    <a href="#">#css</a> <a href="#">#responsive</a>
+                    <br>
+                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
+    <div class="row pt-5">
+        <div class="col-lg-3 col-md-6 mb-5">
+            <a href="" class="navbar-brand">
+                <a href="/"><img src="../static/images\cookpinglogo2.png" alt="로고이미지" width="200px"></a>
+            </a>
+            <p>요즘엔 캠핑이 대세!🔥 <br> 캠핑가서 굽는 요리만 하기는 질렸다!😐😐<br>
+                캠핑, 여행, 펜션가서 할 수 있는 다양한 요리 레시피를 추천하고 공유하는 사이트입니다. 🍽</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Cookping Recipe</h5>
+            <div class="d-flex flex-column justify-content-start">
+                <a class="text-white-50 mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>쿡핑레시피</a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">About us</h5>
+            <div class="d-flex flex-column justify-content-start">
+                <a class="text-white-50 mb-2" href="/about"><i class="fa fa-angle-right mr-2"></i>쿡핑이란?</a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Our Project
+                Info</h5>
+            <div class="d-flex flex-column justify-content-start">
+                <a class="text-white-50 mb-2" href="https://hightechsoon.tistory.com/15"><i
+                        class="fa fa-angle-right mr-2"></i>Starting Assignment</a>
+                <a class="text-white-50 mb-2" href="https://github.com/Younddo/campinggabojago"><i
+                        class="fa fa-angle-right mr-2"></i>Github</a>
+                <a class="text-white-50 mb-2" href="https://discord.gg/krQhXcZXmG"><i
+                        class="fa fa-angle-right mr-2"></i>Discord</a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
+     style="border-color: rgba(256, 256, 256, .1) !important;">
+    <div class="row">
+        <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
+            <p class="m-0 text-white-50">Copyright &copy; <a href="#">항해99 9기 11조 풀스택미니프로젝트</a>. All
+                Rights
+                Reserved.</a>
+            </p>
+        </div>
+
+        <div class="col-lg-6 text-center text-md-right">
+            <p class="m-0 text-white-50">Designed by <a href="https://htmlcodex.com">HTML Codex</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+<!-- Footer End -->
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+        class="fa fa-angle-double-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="../static/lib/easing/easing.min.js"></script>
+<script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../static/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="../static/mail/jqBootstrapValidation.min.js"></script>
+<script src="../static/mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="../static/js/main2.js"></script>
+</body>
+
+</html>
+
+
+<!--<!Doctype html>-->
+<!--<html lang="ko">-->
+
+<!--    <head>-->
+<!--        &lt;!&ndash; Required meta tags &ndash;&gt;-->
+<!--        <meta charset="utf-8">-->
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+
+<!--        &lt;!&ndash; Bootstrap CSS &ndash;&gt;-->
+<!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"-->
+<!--              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"-->
+<!--              crossorigin="anonymous">-->
+
+<!--        &lt;!&ndash; JS &ndash;&gt;-->
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"-->
+<!--                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"-->
+<!--                crossorigin="anonymous"></script>-->
+
+<!--        &lt;!&ndash; 구글폰트 &ndash;&gt;-->
+<!--        <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">-->
+
+
+<!--        <title>스파르타코딩클럽 | 나홀로 메모장</title>-->
+
+<!--        &lt;!&ndash; style &ndash;&gt;-->
+<!--        <style type="text/css">-->
+<!--            * {-->
+<!--                font-family: "Stylish", sans-serif;-->
+<!--            }-->
+
+<!--            .wrap {-->
+<!--                width: 900px;-->
+<!--                margin: auto;-->
+<!--            }-->
+
+<!--            .comment {-->
+<!--                color: blue;-->
+<!--                font-weight: bold;-->
+<!--            }-->
+
+<!--            #post-box {-->
+<!--                width: 500px;-->
+<!--                margin: 20px auto;-->
+<!--                padding: 50px;-->
+<!--                border: black solid;-->
+<!--                border-radius: 5px;-->
+<!--            }-->
+<!--        </style>-->
+<!--        <script>-->
+<!--            $(document).ready(function () {-->
+<!--                showArticles();-->
+<!--            });-->
+
+<!--            function openClose() {-->
+<!--                if ($("#post-box").css("display") == "block") {-->
+<!--                    $("#post-box").hide();-->
+<!--                    $("#btn-post-box").text("포스팅 박스 열기");-->
+<!--                } else {-->
+<!--                    $("#post-box").show();-->
+<!--                    $("#btn-post-box").text("포스팅 박스 닫기");-->
+<!--                }-->
+<!--            }-->
+
+<!--            function postArticle() {-->
+<!--                let url = $('#post-url').val()-->
+<!--                let comment = $('#post-comment').val()-->
+
+<!--                $.ajax({-->
+<!--                    type: "POST",-->
+<!--                    url: "/memo",-->
+<!--                    data: {url_give:url, comment_give:comment},-->
+<!--                    success: function (response) { // 성공하면-->
+<!--                        alert(response["msg"]);-->
+<!--                        window.location.reload()-->
+<!--                    }-->
+<!--                })-->
+<!--            }-->
+
+<!--            function showArticles() {-->
+<!--                $.ajax({-->
+<!--                    type: "GET",-->
+<!--                    url: "/memo",-->
+<!--                    data: {},-->
+<!--                    success: function (response) {-->
+<!--                        let articles = response['all_articles']-->
+<!--                        for (let i = 0; i < articles.length; i++) {-->
+<!--                            let title = articles[i]['title']-->
+<!--                            let image = articles[i]['image']-->
+<!--                            let url = articles[i]['url']-->
+<!--                            let desc = articles[i]['desc']-->
+<!--                            let comment = articles[i]['comment']-->
+
+<!--                            let temp_html = `<div class="card">-->
+<!--                                                <img class="card-img-top"-->
+<!--                                                     src="${image}"-->
+<!--                                                     alt="Card image cap">-->
+<!--                                                <div class="card-body">-->
+<!--                                                    <a target="_blank" href="${url}" class="card-title">${title}</a>-->
+<!--                                                    <p class="card-text">${desc}</p>-->
+<!--                                                    <p class="card-text comment">${comment}</p>-->
+<!--                                                </div>-->
+<!--                                            </div>`-->
+<!--                            $('#cards-box').append(temp_html)-->
+<!--                        }-->
+<!--                    }-->
+<!--                })-->
+<!--            }-->
+<!--        </script>-->
+
+<!--    </head>-->
+
+<!--    <body>-->
+<!--        <div class="wrap">-->
+<!--            <div class="jumbotron">-->
+<!--                <h1 class="display-4">나홀로 링크 메모장!</h1>-->
+<!--                <p class="lead">중요한 링크를 저장해두고, 나중에 볼 수 있는 공간입니다</p>-->
+<!--                <hr class="my-4">-->
+<!--                <p class="lead">-->
+<!--                    <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">포스팅 박스 열기-->
+<!--                    </button>-->
+<!--                </p>-->
+<!--            </div>-->
+<!--            <div id="post-box" class="form-post" style="display:none">-->
+<!--                <div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="post-url">아티클 URL</label>-->
+<!--                        <input id="post-url" class="form-control" placeholder="">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="post-comment">간단 코멘트</label>-->
+<!--                        <textarea id="post-comment" class="form-control" rows="2"></textarea>-->
+<!--                    </div>-->
+<!--                    <button type="button" class="btn btn-primary" onclick="postArticle()">기사저장</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div id="cards-box" class="card-columns">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </body>-->
+
+<!--</html> -->

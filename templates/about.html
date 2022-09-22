@@ -1,0 +1,287 @@
+<head>
+
+    <title>Cookping</title>
+
+    <!-- index에서 필요한 기능-->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <!-- Favicon -->
+    <link href="../static/images/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet"/>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../static/css/style2.css" rel="stylesheet">
+
+
+
+    <script>
+        // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
+        function logout() {
+            alert('로그아웃!')
+            window.location.href = '/login'
+        }
+
+    </script>
+    <style>
+        .row {
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+<!-- Topbar Start -->
+<div class="container-fluid bg-light pt-3 d-none d-lg-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <!--<p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+                    <p class="text-body px-3">|</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</p> -->
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
+<!-- Navbar Start -->
+<div class="container-fluid position-relative nav-bar p-0">
+    <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+            <a href="/"><img src="../static/images\cookpinglogo1.png" alt="로고이미지" width="200px"></a>
+            <!-- <a href="" class="navbar-brand">
+                <h1 class="m-0 text-primary">cookping</h1>
+            </a> -->
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav ml-auto py-0">
+                    <a href="/" class="nav-item nav-link">쿡핑레시피</a>
+                    <a href="/about" class="nav-item nav-link active">쿡핑이란?</a>
+                    <a  href="javascript:void(0);" onclick="logout()" class="nav-item nav-link">로그아웃</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar End -->
+
+
+<!-- Header Start -->
+<div class="container-fluid page-header">
+    <div class="container">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-4 text-white text-uppercase">Welcome</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase">쿡핑을 소개합니다👋</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<!-- About Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-lg-6" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100" src="../static/images/breakfast-g5e1389ee0_1920.jpg"
+                         style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 pt-5 pb-lg-5">
+                <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
+                    <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">About Us</h6>
+                    <h1 class="mb-3">Cooking + Camping <br> = 💁‍♂️ Cookping 🧏‍♀️</h1>
+                    <br>
+                    <p> 굽기만 하는 요리에 지쳤어요...!😖 <br>
+                        🧐 캠핑가서 다른 사람들은 멋있고 다양한 요리 하던데 어떻게 하는지 모르겠어요 <br>
+                        캠핑 요리 고수입니다! 알고 있는 정보를 공유하고 싶어요 !😎 <br><br>
+
+                        쿡핑은 다양한 캠핑 요리 레시피를 손쉽게 공유하고 찾아볼 수 있는 사이트 입니다.</p> <!-- 설명 더 길게 추가할 수 있으면 좋을 거 같다!-->
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <img class="img-fluid" src="../static/images\grill-g1b3c3a6a3_1920.jpg" alt="">
+                        </div>
+                        <div class="col-6">
+                            <img class="img-fluid" src="../static/images\sausage-g16043fd03_1920.jpg" alt="">
+                        </div>
+                    </div>
+                    <a href="/" class="btn btn-primary mt-1">보러가기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+
+<!-- Team Start -->
+
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <div class="text-center mb-3 pb-3">
+            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">항해99 9기 C반 11조</h6>
+            <h1>Team Members</h1>
+        </div>
+        <div class="row">
+
+                <div class="col-lg-3 col-md-3 col-sm-6 pb-1">
+                    <div class="team-item bg-white mb-3">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="../static/images/soonhan.jpg" alt="">
+                        </div>
+                        <div class="text-center py-4">
+                            <h5 class="text-truncate">권순한</h5>
+                            <p class="m-0">soonable@naver.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 pb-1">
+                    <div class="team-item bg-white mb-3">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="../static/images/younseo.jpg" alt="">
+                        </div>
+                        <div class="text-center py-4">
+                            <h5 class="text-truncate">장윤서</h5>
+                            <p class="m-0">younseojj@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 pb-1">
+                    <div class="team-item bg-white mb-3">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="../static/images/jaejeong.jpg" alt="">
+                        </div>
+                        <div class="text-center py-4">
+                            <h5 class="text-truncate">주재정</h5>
+                            <p class="m-0">j55267035@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 pb-1">
+                    <div class="team-item bg-white mb-3">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="../static/images/cookping.jpg" alt="">
+                        </div>
+                        <div class="text-center py-4">
+                            <h5 class="text-truncate">COOKPING</h5>
+                            <p class="m-0">First MINI Project</p>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Team End -->
+
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
+    <div class="row pt-5">
+        <div class="col-lg-3 col-md-6 mb-5">
+            <a href="" class="navbar-brand">
+                <a href="index.html"><img src="../static/images\cookpinglogo2.png" alt="로고이미지" width="200px"></a>
+            </a>
+            <p>요즘엔 캠핑이 대세!🔥 <br> 캠핑가서 굽는 요리만 하기는 질렸다!😐😐<br>
+                캠핑, 여행, 펜션가서 할 수 있는 다양한 요리 레시피를 추천하고 공유하는 사이트입니다. 🍽</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Cookping Recipe</h5>
+            <div class="d-flex flex-column justify-content-start">
+                <a class="text-white-50 mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>쿡핑레시피</a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">About us</h5>
+            <div class="d-flex flex-column justify-content-start">
+                <a class="text-white-50 mb-2" href="/about"><i class="fa fa-angle-right mr-2"></i>쿡핑이란?</a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Our Project Info</h5>
+            <div class="d-flex flex-column justify-content-start">
+                <a class="text-white-50 mb-2" href="https://hightechsoon.tistory.com/15"><i
+                        class="fa fa-angle-right mr-2"></i>Starting Assignment</a>
+                <a class="text-white-50 mb-2" href="https://github.com/Younddo/campinggabojago"><i
+                        class="fa fa-angle-right mr-2"></i>Github</a>
+                <a class="text-white-50 mb-2" href="https://discord.gg/krQhXcZXmG"><i
+                        class="fa fa-angle-right mr-2"></i>Discord</a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
+     style="border-color: rgba(256, 256, 256, .1) !important;">
+    <div class="row">
+        <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
+            <p class="m-0 text-white-50">Copyright &copy; <a href="#">항해99 9기 11조 풀스택미니프로젝트</a>. All Rights
+                Reserved.</a>
+            </p>
+        </div>
+
+        <div class="col-lg-6 text-center text-md-right">
+            <p class="m-0 text-white-50">Designed by <a href="https://htmlcodex.com">HTML Codex</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+<!-- Footer End -->
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="../static/lib/easing/easing.min.js"></script>
+<script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../static/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="../static/mail/jqBootstrapValidation.min.js"></script>
+<script src="../static/mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="../static/js/main2.js"></script>
+</body>
+
+</html>

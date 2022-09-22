@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Cookping</title>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bulma CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+        <script>
+            // 간단한 회원가입 함수입니다.
+            // 아이디, 비밀번호, 닉네임을 받아 DB에 저장합니다.
+            function register() {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/register",
+                    data: {
+                        id_give: $('#userid').val(),
+                        pw_give: $('#userpw').val(),
+                        nickname_give: $('#usernick').val()
+                    },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            alert('회원가입이 완료되었습니다.')
+                            window.location.href = '/login'
+                        } else {
+                            alert(response['msg'])
+                        }
+                    }
+                })
+            }
+
+        </script>
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="../static/css/style.css">
+
+	</head>
+	<body class="img js-fullheight" style="background-image: url(../static/images/bgbg.png);">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<a href="login.html"><img src ="../static/images/cookpinglogo2.png"></a>
+					<h2 class="heading-section"> </h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h3 class="mb-4 text-center">🎉회원가입🎉</h3>
+		      	<form action="#" class="signin-form">
+		      		<div class="form-group">
+		      			<input type="text" class="form-control" id="userid" aria-describedby="emailHelp" placeholder="아이디" required>
+		      		</div>
+                    <div class="form-group">
+                      <input type="password" class="form-control" id="userpw" placeholder="비밀번호" required>
+                      <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+                    <!-- <div class="form-group">
+                      <input id= type="password" class="form-control" placeholder="비밀번호확인" required>
+                      <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div> -->
+                    <div class="form-group">
+		      			<input type="text" class="form-control" id="usernick" placeholder="닉네임" required>
+		      		</div>
+                    <div class="form-group">
+                        <button class="form-control btn btn-primary submit px-3" onclick="register()" >회원가입하기</button>
+                    </div>
+                    <br><br>
+	          </form>
+	          <p class="w-100 text-center">&mdash; 이미 계정이 있으신가요? &mdash;</p>
+	          <div class="social d-flex text-center">
+	          	<a href="/login" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> 로그인하기</a>
+	          </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/popper.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/main.js"></script>
+
+	</body>
+</html>
+
+
+
+
+
