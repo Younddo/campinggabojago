@@ -18,7 +18,7 @@ Youtube 링크를 공유해 보세요! 🎬
 ## ◼️ 프로젝트 S.A 
 https://hightechsoon.tistory.com/15
 
-## ◼️ 프로젝트 시연 영상
+## ◼️ 프로젝트 시연 영상 🎬
 
 
 
