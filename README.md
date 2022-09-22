@@ -25,7 +25,7 @@ https://youtu.be/JW8gVQv8Umo
 ## ◼️ 기술스택 🔨
 HTML / CSS / JavaScript / Python / Flask / mongoDB / Jinja2 /JQuery / Linux / AWS 
 
-##  ✏️ API Table ✏️
+## ◼️ API Table ✏️
 기능 | Method | URL | Request | response | 
 --- | --- | --- | --- |--- |
 로그인 페이지 로드 | POST | /login | -- | return render_template('index.html', user_info=user_info) |
