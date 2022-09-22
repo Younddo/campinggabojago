@@ -39,14 +39,18 @@ HTML / CSS / JavaScript / Python / Flask / mongoDB / Jinja2 /JQuery / Linux / AW
 
 ## ◼️ 구현 기능 
 ### 1.Login Page 로그인
+<img width="1440" alt="KakaoTalk_20220922_162812239_01" src="https://user-images.githubusercontent.com/99253403/191685729-bfda3675-baa6-47f2-a2ab-7e2e1ffac3df.png">
 JWT 방식으로 구현
 회원가입 버튼 클릭 시 회원 가입페이지로 이동
 
 ### 2.Register Page 회원가입
+<img width="1440" alt="KakaoTalk_20220922_162812239_03" src="https://user-images.githubusercontent.com/99253403/191685755-b60cf178-b00b-455a-9172-f1f32ebee894.png">
 아이디 중복확인 시 중복아이디 및 아이디 유무 체크
 비밀번호 입력칸과 재입력칸의 비밀번호 일치여부 체크
 
 ### 3. Main Page 메인화면
+<img width="1440" alt="KakaoTalk_20220922_162812239_02" src="https://user-images.githubusercontent.com/99253403/191685937-7c9d4da4-a726-4d3b-acbb-307f12e77856.png">
+<img width="1440" alt="KakaoTalk_20220922_162812239_04" src="https://user-images.githubusercontent.com/99253403/191685845-3cfe57d0-47e6-4e03-a3f0-a919edb6d8ee.png">
 User들이 작성한 글들을 보여주는 페이지
 토글아이콘 클릭시 내비게이션 나타남 (모바일 또는 화면 사이즈 작을 경우)
 내비게이션 바의 로그아웃 버튼 클릭 시 로그인페이지로 이동 
@@ -54,12 +58,14 @@ User들이 작성한 글들을 보여주는 페이지
 글쓰기 화면에서 생성한 게시물이 화면에 나타남
 
 ### 4. Posting Page 글쓰기 화면
+<img width="1440" alt="KakaoTalk_20220922_162812239" src="https://user-images.githubusercontent.com/99253403/191685865-29ed362d-cbfb-4f91-8b82-97bef94df8b0.png">
 글제목, 코멘트, URL 을 작성할 수 있는 입력란 
 유튜브 URL 작성 시, 해당 유튜브영상의 썸네일과 링크가 
 메인페이지에 나타남
 작성 버튼 클릭시, DB에 해당 글이 저장
 
 ### 5.About Page 소개 화면
+![Screenshot 2022-09-22 at 16 34 25](https://user-images.githubusercontent.com/99253403/191686118-e38856a1-d15f-4640-885c-4ff8e8230041.JPG)
 쿡핑과 팀원의 소개를 보여주는 페이지 
 보러가기 아이콘 클릭시 메인페이지로 이동
 
