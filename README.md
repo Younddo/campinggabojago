@@ -66,6 +66,7 @@ User들이 작성한 글들을 보여주는 페이지
 
 ### 5.About Page 소개 화면
 ![Screenshot 2022-09-22 at 16 34 25](https://user-images.githubusercontent.com/99253403/191686118-e38856a1-d15f-4640-885c-4ff8e8230041.JPG)
+
 쿡핑과 팀원의 소개를 보여주는 페이지 
 보러가기 아이콘 클릭시 메인페이지로 이동
 
