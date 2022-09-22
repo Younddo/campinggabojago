@@ -25,6 +25,18 @@ https://youtu.be/JW8gVQv8Umo
 ## ◼️ 기술스택 🔨
 HTML / CSS / JavaScript / Python / Flask / mongoDB / Jinja2 /JQuery / Linux / AWS 
 
+##  ✏️ API Table ✏️
+기능 | Method | URL | Request | response | 
+--- | --- | --- | --- |--- |
+로그인 페이지 로드 | POST | /login | -- | return render_template('index.html', user_info=user_info) |
+회원가입 페이지 로드 | POST | /login | -- | return render_template('index.html', user_info=user_info) |
+로그인 | POST | /sign_in |{'username': username_receive, 'password': pw_hash} |로그인 성공 - return jsonify({'result': 'success', 'token': token}) 로그인 실패 - return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'}) |
+회원가입 | POST | /sign_up/save | {"username": username_receive, "password": password_hash, "profile_name": username_receive, "profile_pic": "", "profile_pic_real": "profile_pics/profile_placeholder.png", "profile_info": "" } | return render_template('index.html', user_info=user_info) |
+중복 검사 | POST | /login | "username": username_receive | return jsonify({'result': 'success', 'exists': exists})|
+메인페이지 | GET | /get_posts | /get_posts | return jsonify({"result": "success", "msg": "포스팅을 가져왔습니다.","posts":posts}) |
+글쓰기 | POST | /posting | "username": user_info["username"], "profile_name": user_info["profile_name"], "profile_pic_real": user_info["profile_pic_real"], "comment": comment_receive, "date": date_receive | return jsonify({"result": "success", 'msg': '포스팅 성공'}) |
+포스팅 | GET | /sign_up/check_dup | post["_id"] = str(post["_id"]) | return jsonify({"result": "success", "msg": "포스팅을 가져왔습니다.","posts":posts}) |
+
 ## ◼️ 구현 기능 
 ### 1.Login Page 로그인
 JWT 방식으로 구현
@@ -50,4 +62,5 @@ User들이 작성한 글들을 보여주는 페이지
 ### 5.About Page 소개 화면
 쿡핑과 팀원의 소개를 보여주는 페이지 
 보러가기 아이콘 클릭시 메인페이지로 이동
+
 
