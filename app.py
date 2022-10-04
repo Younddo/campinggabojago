@@ -9,7 +9,7 @@ from pymongo import MongoClient
 import certifi
 app = Flask(__name__)
 ca = certifi.where()
-client = MongoClient('mongodb+srv://younseo:0000@cluster0.gwkxhoj.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca)
+client = MongoClient('mongodb+srv://younseo:******@cluster0.gwkxhoj.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.dbsparta_cookping
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
